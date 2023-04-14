@@ -1,0 +1,119 @@
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.main {
+  background: url("/images/slider_bg.jpg");
+  height: 100vh;
+  display: flex;
+  .content {
+    flex-grow: 1;
+    height: 100vh;
+
+    .formContainer {
+      position: relative;
+      transform: translate(0, -50%) skew(-7deg, 0);
+      border-radius: 8px;
+      margin-left: auto;
+      width: 65%;
+      top: 50%;
+      height: 80%;
+      background-color: #261447;
+      background: linear-gradient(-45deg, #a44d32, #7f1d43, #0e4457, #116451);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+
+      .form {
+        position: relative;
+        transform: translate(0, -50%);
+        top: 50%;
+        margin: auto;
+        width: 80%;
+        height: 80%;
+      }
+    }
+  }
+
+  .images {
+    flex-grow: 0.7;
+    height: 100vh;
+    position: relative;
+
+    .steamLogoContainer {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      aspect-ratio: 1/1;
+      height: 50%;
+
+      .steamLogo {
+        display: block;
+        padding: 4px;
+      }
+
+      //Анимация
+
+      --border-size: 3px;
+      --border-angle: 0turn;
+
+      border-radius: 50%;
+      background-image: conic-gradient(
+          from var(--border-angle),
+          rgba(57, 35, 80, 0),
+          rgba(17, 17, 34, 0) 50%,
+          rgba(34, 17, 51, 0)
+        ),
+        conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03);
+      background-size: calc(100% - (var(--border-size) * 2))
+          calc(100% - (var(--border-size) * 2)),
+        cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+
+      animation: bg-spin 3s linear infinite;
+      @keyframes bg-spin {
+        to {
+          --border-angle: 1turn;
+        }
+      }
+    }
+  }
+}
+
+.cursor {
+  pointer-events: none;
+  &Ball {
+    position: fixed;
+    top: 0;
+    left: 0;
+    mix-blend-mode: difference;
+    z-index: 1000;
+    circle {
+      fill: #06a154;
+    }
+    * {
+      display: block;
+    }
+    &Target {
+      svg {
+        margin: 1px;
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
