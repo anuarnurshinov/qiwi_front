@@ -37,4 +37,4 @@ jobs:
         run: ssh PROD 'sudo docker-compose up --force-recreate --build -d'
 
       - name: Prune images
-        run: ssh PROD 'sudo docker image prune'
+        run: ssh PROD 'sudo docker image prune -f'
