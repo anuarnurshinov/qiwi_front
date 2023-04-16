@@ -20,9 +20,9 @@ export default function Home() {
   };
   const imageRef = useRef(null);
 
-  useEffect(() => {
-    new HoverButton(imageRef.current);
-  }, []);
+  // useEffect(() => {
+  //   new HoverButton(imageRef.current);
+  // }, []);
 
   const theme = createTheme({
     palette: { mode: "dark" },
@@ -51,6 +51,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           <div className={styles.images}>
             <div ref={imageRef} className={styles.steamLogoContainer}>
               <Image
