@@ -1,12 +1,9 @@
 # Install dependencies only when needed
-FROM node:16-alpine AS deps
-WORKDIR /app
-COPY package.json ./
-RUN npm install
+FROM node:lts-alpine AS deps
 
-# Production image, copy all the files and run next
-FROM node:16-alpine AS runner
-WORKDIR /app
-COPY --from=deps /app .
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
+WORKDIR .
+COPY package.json package-lock.json ./
+RUN npm i
+COPY . .
+RUN npm run build
+CMD ["node_modules/.bin/next", "start"]
