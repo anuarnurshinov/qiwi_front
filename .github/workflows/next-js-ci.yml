@@ -1,0 +1,33 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Next js
+
+on:
+  push:
+    branches: [ "master"]
+
+env:
+  DOCKER_REGISTRY_REPO: "alimzhannurshinov"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: docker_repo_name
+        uses: ASzc/change-string-case-action@v2
+        with:
+          string: ${{ github.event.repository.name }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_LOGIN }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ env.DOCKER_REGISTRY_REPO }}/qiwi_frontend:${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
