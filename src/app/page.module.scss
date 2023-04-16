@@ -6,12 +6,10 @@
 
 .main {
   background: url("/images/slider_bg.jpg");
-  height: 100vh;
+  min-height: fit-content;
   display: flex;
   .content {
     flex-grow: 1;
-    height: 100vh;
-
     .formContainer {
       position: relative;
       transform: translate(0, -50%) skew(-7deg, 0);

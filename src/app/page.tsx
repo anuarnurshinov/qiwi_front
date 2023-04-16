@@ -3,15 +3,14 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import steamLogo from "/public/images/steam.svg";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HoverButton } from "./imageAnimation";
 import Form from "./components/Form";
-import { ThemeProvider, createTheme } from "@mui/material";
-//@ts-ignore
-import GTA_Russia from "../../public/fonts/GTA_Russian.ttf";
+import { Button, Snackbar, ThemeProvider, createTheme } from "@mui/material";
 
 export default function Home() {
   const cursorSmall = useRef(null);
+
   const onMouseMoveCursorAnimation = (e: React.MouseEvent) => {
     gsap.to(cursorSmall.current, {
       x: e.pageX - 5,
@@ -31,6 +30,7 @@ export default function Home() {
       fontFamily: [].join(","),
     },
   });
+
   return (
     <ThemeProvider theme={theme}>
       <>
